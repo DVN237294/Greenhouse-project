@@ -1,0 +1,132 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: 237294@via.dk
+    name: David V. Nielsen
+  description: Web API for EOS Course project
+  title: EOS Course Project API
+  version: v1
+paths:
+  /api/getAllSensorData:
+    get:
+      operationId: apiGetAllSensorDataGET
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getAllSensorDataResponse'
+          description: Success
+      tags:
+      - main
+      x-openapi-router-controller: MainController
+      x-openapi-router-service: MainService
+  /api/rotateServo:
+    post:
+      operationId: apiRotateServoPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rotateServoBody'
+      responses:
+        200:
+          description: Success
+      tags:
+      - main
+      x-openapi-router-controller: MainController
+      x-openapi-router-service: MainService
+  /api/setLightIntensity:
+    post:
+      operationId: apiSetLightIntensityPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/setLightIntensityBody'
+      responses:
+        200:
+          description: Success
+      tags:
+      - main
+      x-openapi-router-controller: MainController
+      x-openapi-router-service: MainService
+  /api/setHeaterStatus:
+    post:
+      operationId: apiSetHeaterStatusPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/setHeaterStatusBody'
+      responses:
+        200:
+          description: Success
+      tags:
+      - main
+      x-openapi-router-controller: MainController
+      x-openapi-router-service: MainService
+components:
+  schemas:
+    setLightIntensityBody:
+      properties:
+        pwmLightIntensity:
+          default: 0
+          type: number
+      type: object
+    rotateServoBody:
+      properties:
+        servoPositionFriendly:
+          default: unknown
+          enum:
+          - Open
+          - Closed
+          type: string
+      type: object
+    setHeaterStatusBody:
+      properties:
+        heaterStatus:
+          default: unknown
+          enum:
+          - On
+          - Off
+          type: string
+      type: object
+    getAllSensorDataResponse:
+      example:
+        lightIntensity: unknown
+        heaterStatus: On
+        temperature: unknown
+        humidity: unknown
+        pwmLightIntensity: unknown
+        servoPositionFriendly: unknown
+        servoPosition: unknown
+      properties:
+        temperature:
+          default: unknown
+          type: string
+        humidity:
+          default: unknown
+          type: string
+        lightIntensity:
+          default: unknown
+          type: string
+        pwmLightIntensity:
+          default: unknown
+          type: string
+        servoPositionFriendly:
+          default: unknown
+          enum:
+          - Open
+          - Closed
+          type: string
+        servoPosition:
+          default: unknown
+          type: string
+        heaterStatus:
+          enum:
+          - On
+          - Off
+          type: string
+      title: Sensor data object
+      type: object
