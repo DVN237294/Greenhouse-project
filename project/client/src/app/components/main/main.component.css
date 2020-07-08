@@ -1,0 +1,41 @@
+/* Emphasis mouse hover over control cards by creating a green box shadow around it */
+.controllables .card:hover {
+  transition: 0.2s;
+  box-shadow: 0 8px 16px 0 rgba(2, 158, 67, 0.603);
+  border-color: rgb(6, 170, 0) !important;
+}
+
+/* Make the card deck and it's children take up the entire width of the screen */
+.card-deck { 
+  padding: 10px;
+  width: 100%;
+}
+
+/* Disable animation on the refresh bar to make it more precise */
+.refresh-bar {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+/* Center the h6 element in it's parent. 
+ * Requires the parent to have text-align: center
+ */
+.progress h6 {
+  position: absolute;
+  margin: 0 auto; left: 0; right: 0;
+}
+
+/* Allow for centering child h6 element */
+.progress {
+  text-align: center;
+}
+
+.loading-spinner
+{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+}

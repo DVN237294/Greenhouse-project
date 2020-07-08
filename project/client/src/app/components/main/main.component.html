@@ -1,0 +1,118 @@
+<div *ngIf="sensorData$ | async as data else dataNotReady">
+    <h2 class="text-center">EOS Course Project - Greenhouse</h2>
+    <h2 style="text-align: left;">Status</h2>
+    <div class="row">
+        <div class="card-deck">
+            <!-- Temperature card -->
+            <div class="card text-center border-secondary mb-3">
+                <div class="card-header">
+                    <h5 class="mb-1">
+                        <div class="card-title ">
+                            Temperature
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{data.temperature}}</p>
+                </div>
+            </div>
+
+            <!-- Humidity card -->
+            <div class="card text-center border-secondary mb-3">
+                <div class="card-header">
+                    <h5 class="mb-1">
+                        <div class="card-title ">
+                            Humidity
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{data.humidity}}</p>
+                </div>
+            </div>
+
+            <!-- Light card -->
+            <div class="card text-center border-secondary mb-3">
+                <div class="card-header">
+                    <h5 class="mb-1">
+                        <div class="card-title ">
+                            Illumination
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{data.lightIntensity}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 20px;" class="progress">
+        <h6>Refreshing in {{timeToRefresh | number : '1.1-1'}}s</h6>
+        <div #refreshProgressBar class="refresh-bar progress-bar progress-bar-striped" role="progressbar"
+            [style.width]="refreshProgress + '%'">
+
+        </div>
+    </div>
+    <hr />
+    <h2 style="text-align: left;">Controls</h2>
+    <div class="row">
+        <div class="card-deck controllables" (mouseenter)="mouseOverControls = true"
+            (mouseleave)="mouseOverControls = false">
+            <!-- Heater card -->
+            <div class="card text-center border-secondary mb-3" (click)="toggleHeater(data)">
+                <div class="card-header">
+                    <h5 class="mb-1">
+                        <div class="card-title ">
+                            Heater Status
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{data.heaterStatus}}</p>
+                </div>
+                <div class="card-footer">Click to toggle</div>
+            </div>
+
+            <!-- Window card -->
+            <div class="card text-center border-secondary mb-3" (click)="toggleWindow(data)">
+                <div class="card-header">
+                    <h5 class="mb-1">
+                        <div class="card-title ">
+                            Window Position
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{data.servoPositionFriendly}}</p>
+                </div>
+                <div class="card-footer">Click to toggle</div>
+            </div>
+
+            <!-- Pwm light card -->
+            <div #lightControl class="card text-center border-secondary mb-3">
+                <div class="card-header">
+                    <h5 class="mb-1">
+                        <div class="card-title ">
+                            PWM Light
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress">
+                        <div class="progress-bar bg-success" [style.width]="pwmProgress + '%'">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">Scroll me!</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ng-template to be shown while the page is waiting for the API to return data -->
+<ng-template #dataNotReady>
+    <div class="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+        </div>
+        <h5>Loading...</h5>
+    </div>
+</ng-template>
