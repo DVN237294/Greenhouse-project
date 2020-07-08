@@ -1,0 +1,170 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "EOS Course Project API",
+        "description": "Web API for EOS Course project",
+        "contact": {
+            "name": "David V. Nielsen",
+            "email": "237294@via.dk"
+        },
+        "version": "v1"
+    },
+    "paths": {
+        "/api/getAllSensorData": {
+            "get": {
+                "tags": [
+                    "main"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/getAllSensorDataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rotateServo": {
+            "post": {
+                "tags": ["main"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/rotateServoBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/setLightIntensity": {
+            "post": {
+                "tags": ["main"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/setLightIntensityBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/setHeaterStatus": {
+            "post": {
+                "tags": ["main"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/setHeaterStatusBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "setLightIntensityBody": {
+                "type": "object",
+                "properties": {
+                    "pwmLightIntensity": {
+                        "type": "number",
+                        "default": 0
+                    }
+                }
+            },
+            "rotateServoBody": {
+                "type": "object",
+                "properties": {
+                    "servoPositionFriendly": {
+                        "type": "string",
+                        "enum": [
+                            "Open",
+                            "Closed"
+                        ],
+                        "default": "unknown"
+                    }
+                }
+            },
+            "setHeaterStatusBody": {
+                "type": "object",
+                "properties": {
+                    "heaterStatus": {
+                        "type": "string",
+                        "enum": [
+                            "On",
+                            "Off"
+                        ],
+                        "default": "unknown"
+                    }
+                }
+            },
+            "getAllSensorDataResponse": {
+                "type": "object",
+                "title": "Sensor data object",
+                "properties": {
+                    "temperature": {
+                        "type": "string",
+                        "default": "unknown"
+                    },
+                    "humidity": {
+                        "type": "string",
+                        "default": "unknown"
+                    },
+                    "lightIntensity": {
+                        "type": "string",
+                        "default": "unknown"
+                    },
+                    "pwmLightIntensity": {
+                        "type": "string",
+                        "default": "unknown"
+                    },
+                    "servoPositionFriendly": {
+                        "type": "string",
+                        "enum": [
+                            "Open",
+                            "Closed"
+                        ],
+                        "default": "unknown"
+                    },
+                    "servoPosition": {
+                        "type": "string",
+                        "default": "unknown"
+                    },
+                    "heaterStatus": {
+                        "type": "string",
+                        "enum": [
+                            "On",
+                            "Off"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
